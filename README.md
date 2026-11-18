@@ -1,5 +1,5 @@
 # JUST ROLL — Angular
-
+repositorio antiguo en React https://github.com/Luciana-Cuenca/JustRoll.git
 Migración completa de la aplicación React a una aplicación Angular con TypeScript estricto. Conserva el contenido, las rutas, los estilos y los recursos del original.
 
 ## Ejecutar
