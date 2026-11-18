@@ -1,0 +1,19 @@
+<section [class]="'tier-group tier-' + tier.id.toLowerCase()"
+  ><div class="tier-group-heading"
+    ><div class="tier-rank-letter">{{ tier.id }}</div
+    ><h3>{{ tier.name }}</h3
+    ><p>{{ tier.description }}</p></div
+  >
+  @if (compositions.length > 0) {
+    <div class="tier-card-grid">
+      @for (composition of compositions; track $index) {
+        <jr-composition-card
+          [composition]="composition"
+          (selectComposition)="selectComposition.emit($event)"
+        ></jr-composition-card>
+      }
+    </div>
+  } @else {
+    <div class="tier-empty"><p>Próximamente</p></div>
+  }
+</section>
