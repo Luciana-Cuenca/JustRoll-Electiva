@@ -1,0 +1,42 @@
+<section class="hero paper-texture"
+  ><div class="hero-container"
+    ><div class="hero-content"
+      ><span class="hero-eyebrow"><span class="eyebrow-dot"></span>TU GUÍA PARA TFT</span
+      ><h1 class="hero-title"
+        ><span class="title-line">JUST</span
+        ><span class="title-line title-highlight">ROLL!</span></h1
+      ><p class="hero-description"
+        >Aprende a construir composiciones, administrar tu economía y tomar mejores decisiones en
+        cada partida de Teamfight Tactics.</p
+      ><div class="hero-actions"
+        ><a routerLink="/composiciones" class="btn btn-orange"
+          >Explorar composiciones <span>↗</span></a
+        ><a routerLink="/tutoriales" class="btn btn-cream">Aprende a jugar</a></div
+      ><div class="hero-note"
+        ><span class="hero-note-line"></span><span>PIENSA. ADAPTA. ¡HAZ ROLL!</span></div
+      ></div
+    ><div class="hero-art" aria-label="Ilustración decorativa de un tablero de estrategia"
+      ><div class="art-sunburst"></div><div class="art-star art-star-one">✦</div
+      ><div class="art-star art-star-two">✳</div><div class="art-circle"></div
+      ><div class="art-sticker"><span>¡GG!</span><small>GOOD GAME</small></div
+      ><div class="game-board"
+        ><div class="board-top"><span>YOUR BOARD</span><span class="board-round">3-2</span></div
+        ><div class="board-grid">
+          @for (index of sequence(28); track index) {
+            <div class="board-cell">
+              @if ([4, 9, 13, 18, 23].includes(index)) {
+                <span [class]="'board-unit unit-' + index"></span>
+              }
+            </div>
+          }</div
+        ><div class="board-bottom"
+          ><span class="board-gold">◆ 32</span><span>LEVEL 6</span></div
+        ></div
+      ><div class="art-floating-card card-blue"
+        ><span class="floating-card-icon">↗</span><span>ESTRATEGIA</span></div
+      ><div class="art-floating-card card-orange"
+        ><span class="floating-card-icon">★</span><span>¡VICTORIA!</span></div
+      ><div class="art-arrow">↘</div></div
+    ></div
+  ><div class="hero-bottom-decoration"><span></span><span></span><span></span></div
+></section>
