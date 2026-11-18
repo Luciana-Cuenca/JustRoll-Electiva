@@ -1,0 +1,40 @@
+<article
+  [class]="'tier-card tier-card-' + (composition.color || 'blue')"
+  role="button"
+  [tabindex]="0"
+  [attr.aria-label]="'Ver detalles de ' + composition.name"
+  (click)="selectComposition.emit(composition)"
+  (keydown)="handleKeyDown($event)"
+  ><div class="tier-card-top"
+    ><span class="tier-card-category">{{ composition.category }}</span>
+    @if (composition.requirement) {
+      <span class="tier-card-requirement">★ {{ composition.requirement }}</span>
+    }
+    <span class="tier-card-rank">{{ composition.tier }}</span></div
+  ><div class="tier-card-art"
+    ><div class="tier-card-art-frame">
+      @if (composition.image) {
+        <img
+          [src]="composition.image"
+          [alt]="composition.name"
+          class="tier-card-portrait"
+          (error)="hideImage($event)"
+        />
+      }</div></div
+  ><div class="tier-card-content"
+    ><div class="tier-card-title"
+      ><span class="tier-card-id">COMPOSICIÓN #{{ composition.id }}</span
+      ><h3>{{ composition.name }}</h3></div
+    ><p class="tier-card-description">{{ composition.description }}</p
+    ><div class="tier-card-traits">
+      @for (trait of composition.traits || []; track $index) {
+        <span>{{ trait }}</span>
+      }</div
+    ><div class="tier-card-meta"
+      ><span>{{ composition.gameMode }}</span
+      ><span>{{ composition.difficulty }}</span></div
+    ><div class="tier-card-button"
+      ><span>VER COMPOSICIÓN</span><span aria-hidden="true">↗</span></div
+    ></div
+  ></article
+>

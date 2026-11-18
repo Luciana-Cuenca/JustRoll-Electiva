@@ -1,0 +1,351 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+/* =====================================
+   JUST ROLL - DESIGN SYSTEM
+===================================== */
+
+:root {
+  /* NARANJAS */
+  --orange-500: #FF873D;
+  --orange-400: #FFA15D;
+  --orange-300: #FFB66B;
+  --orange-100: #FFE0BD;
+
+  /* AZULES */
+  --blue-700: #1767A8;
+  --blue-500: #2489D8;
+  --blue-400: #65D9FF;
+  --blue-200: #B7EDFF;
+
+  /* COLORES COMPLEMENTARIOS (ARMONÍA AZUL Y NARANJA) */
+  --purple: #2489D8; /* Subtono azul eléctrico */
+  --yellow: #FFE16B;
+  --pink: #FFA15D;   /* Subtono naranja atardecer */
+  --green: #A8DB9B;
+
+  /* NEUTROS */
+  --cream: #FFF0D2;
+  --cream-light: #FFFDF7;
+  --ink: #24242A;
+  --white: #FFFFFF;
+
+  /* TIPOGRAFÍAS */
+  --font-display: "Baloo 2", sans-serif;
+  --font-body: "Nunito", sans-serif;
+
+  /* BORDES Y SOMBRAS */
+  --border-main: 3px solid var(--ink);
+  --border-thick: 4px solid var(--ink);
+
+  --shadow-hard: 5px 5px 0 var(--ink);
+  --shadow-small: 3px 3px 0 var(--ink);
+  --shadow-large: 8px 8px 0 var(--ink);
+
+  /* RADIOS */
+  --radius-small: 10px;
+  --radius-medium: 18px;
+  --radius-large: 28px;
+
+  /* ESPACIADO */
+  --section-space: 100px;
+}
+
+/* =====================================
+   RESET
+===================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* =====================================
+   UTILIDADES GENERALES
+===================================== */
+
+.display-font {
+  font-family: var(--font-display);
+  font-weight: 900;
+}
+
+.section-container {
+  width: min(1200px, 90%);
+  margin-inline: auto;
+}
+
+.section-space {
+  padding-block: var(--section-space);
+}
+
+.outline-box {
+  border: var(--border-main);
+  box-shadow: var(--shadow-hard);
+}
+
+.text-orange {
+  color: var(--orange-500);
+}
+
+.text-blue {
+  color: var(--blue-500);
+}
+
+.text-purple {
+  color: var(--purple);
+}
+
+/* =====================================
+   BOTONES
+===================================== */
+
+.btn {
+  min-height: 48px;
+  padding: 12px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border: var(--border-main);
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow-hard);
+
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 900;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.btn:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.btn:active {
+  transform: translate(5px, 5px);
+  box-shadow: none;
+}
+
+.btn-orange {
+  background: var(--orange-500);
+}
+
+.btn-blue {
+  background: var(--blue-400);
+}
+
+.btn-cream {
+  background: var(--cream-light);
+}
+
+/* =====================================
+   DECORACIÓN
+===================================== */
+
+.sticker {
+  border: var(--border-main);
+  box-shadow: var(--shadow-hard);
+  border-radius: var(--radius-medium);
+}
+
+.paper-texture {
+  background-color: var(--cream);
+  background-image: radial-gradient(
+    rgba(36, 36, 42, 0.09) 1px,
+    transparent 1px
+  );
+  background-size: 18px 18px;
+}
+
+/* =====================================
+   RESPONSIVE GLOBAL
+===================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --section-space: 65px;
+  }
+
+  .section-container {
+    width: 92%;
+  }
+}
+
+
+/* =====================================
+   FOOTER - JUST ROLL
+===================================== */
+
+.site-footer {
+  position: relative;
+  padding: 65px max(5%, calc((100% - 1200px) / 2)) 22px;
+  overflow: hidden;
+
+  background: var(--ink);
+  color: var(--cream-light);
+  border-top: var(--border-thick);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 0.8fr 1fr;
+  gap: 60px;
+  padding-bottom: 55px;
+}
+
+.footer-brand h2 {
+  margin-bottom: 12px;
+  font-family: var(--font-display);
+  font-size: clamp(35px, 4vw, 50px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  transform: rotate(-2deg);
+  transform-origin: left;
+}
+
+.footer-brand h2 span {
+  color: var(--orange-500);
+}
+
+.footer-brand p,
+.footer-about p {
+  max-width: 340px;
+  color: #E5DCCB;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.footer-sticker {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 8px 15px;
+
+  background: var(--blue-400);
+  border: 2px solid var(--cream-light);
+  border-radius: 8px;
+
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 900;
+
+  transform: rotate(-4deg);
+}
+
+.footer-navigation,
+.footer-about {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.footer-navigation h3,
+.footer-about h3 {
+  margin-bottom: 8px;
+  color: var(--yellow);
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.footer-navigation a {
+  color: var(--cream-light);
+  font-size: 15px;
+  font-weight: 700;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-navigation a:hover {
+  color: var(--orange-300);
+  transform: translateX(5px);
+}
+
+.footer-bottom {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  color: #C8C2B9;
+  font-size: 13px;
+}
+
+/* RESPONSIVE DEL FOOTER */
+
+@media (max-width: 750px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer {
+    padding: 45px 6% 20px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-brand {
+    grid-column: auto;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+  }
+}

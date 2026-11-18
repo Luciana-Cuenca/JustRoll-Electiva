@@ -1,0 +1,32 @@
+<article
+  [class]="'tut-card tut-card--' + tutorial.color"
+  role="button"
+  [tabindex]="0"
+  [attr.aria-label]="'Abrir tutorial: ' + tutorial.title"
+  (click)="activate.emit(tutorial)"
+  (keydown)="handleKeyDown($event)"
+  ><span class="tut-card-number" aria-hidden="true">{{ orderLabel }}</span
+  ><div class="tut-card-art"
+    ><img
+      [attr.src]="tutorial.image ?? null"
+      alt=""
+      class="tut-card-art-img"
+      aria-hidden="true"
+      (error)="hideImage($event)"
+    /><div class="tut-card-art-placeholder" aria-hidden="true"
+      ><div class="tut-ph-circle"></div
+      ><div [class]="'tut-ph-shape tut-ph-shape--' + tutorial.color"
+        ><span>{{ orderLabel }}</span></div
+      ><span class="tut-ph-star">✦</span></div
+    ></div
+  ><div class="tut-card-body"
+    ><div class="tut-card-pills"
+      ><span [class]="'tut-pill tut-pill--' + tutorial.color">{{
+        LEVEL_LABELS[tutorial.level]
+      }}</span
+      ><span class="tut-pill tut-pill--time">{{ tutorial.readingTime }} min</span></div
+    ><h3 class="tut-card-title">{{ tutorial.title }}</h3
+    ><p class="tut-card-desc">{{ tutorial.description }}</p
+    ><div class="tut-card-cta" aria-hidden="true">LEER TUTORIAL <span>↗</span></div></div
+  ></article
+>

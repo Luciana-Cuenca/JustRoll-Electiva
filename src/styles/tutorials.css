@@ -1,0 +1,1692 @@
+
+/* ============================================================
+   JUST ROLL — TUTORIALES (Fase 4C revisada)
+   Prefijo exclusivo: tut-
+   Sin emojis. Decoración idéntica a home.css.
+   Importado solo en src/pages/Tutorials.jsx
+   ============================================================ */
+
+/* ──────────────────────────────────────────────────────────
+   VARIABLES LOCALES
+   ────────────────────────────────────────────────────────── */
+.tut-page {
+  --tut-orange:       var(--orange-500, #FF873D);
+  --tut-orange-light: var(--orange-300, #FFB66B);
+  --tut-orange-pale:  var(--orange-100, #FFE0BD);
+  --tut-blue:         var(--blue-500,   #2489D8);
+  --tut-blue-mid:     var(--blue-400,   #65D9FF);
+  --tut-blue-light:   var(--blue-200,   #B7EDFF);
+  --tut-blue-dark:    var(--blue-700,   #1767A8);
+  --tut-purple:       #9B6FD8;
+  --tut-purple-light: #DDD0FF;
+  --tut-yellow:       var(--yellow,     #FFE16B);
+  --tut-ink:          var(--ink,        #24242A);
+  --tut-cream:        var(--cream,      #FFF0D2);
+  --tut-cream-light:  var(--cream-light,#FFFDF7);
+  --tut-radius:       8px;
+  --tut-border:       3px solid var(--tut-ink);
+  --tut-border-thick: 4px solid var(--tut-ink);
+  --tut-shadow:       5px 5px 0 var(--tut-ink);
+  --tut-shadow-sm:    3px 3px 0 var(--tut-ink);
+
+  width: 100%;
+  min-height: 100vh;
+  background: var(--tut-cream);
+  color: var(--tut-ink);
+}
+
+/* ============================================================
+   1. HERO COMPACTO
+   Mismo vocabulario visual que Hero.jsx / home.css
+   ============================================================ */
+
+.tut-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: var(--tut-border-thick);
+  background: var(--tut-blue-mid);
+}
+
+.tut-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  align-items: center;
+  gap: 40px;
+  width: min(1250px, 90%);
+  margin-inline: auto;
+  padding-block: 42px 55px;
+}
+
+/* ── Decoraciones de fondo — igual que art-sunburst / art-circle ── */
+.tut-hero-sunburst {
+  position: absolute;
+  right: 100px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-8deg);
+  width: 340px;
+  height: 340px;
+  background: var(--tut-yellow);
+  clip-path: polygon(
+    50% 0%, 60% 13%, 75% 5%, 78% 22%,
+    96% 25%, 88% 42%, 100% 55%, 84% 65%,
+    91% 83%, 72% 82%, 63% 100%, 50% 86%,
+    35% 100%, 29% 81%, 9% 83%, 17% 65%,
+    0% 54%, 14% 41%, 5% 23%, 25% 22%,
+    31% 5%, 43% 14%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tut-hero-circle {
+  position: absolute;
+  right: 155px;
+  top: 50%;
+  transform: translateY(-50%) rotate(15deg);
+  width: 270px;
+  height: 270px;
+  border: 4px dashed var(--tut-ink);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+.tut-hero-star {
+  position: absolute;
+  pointer-events: none;
+  font-weight: 900;
+  line-height: 1;
+  z-index: 1;
+  color: var(--tut-ink);
+}
+
+.tut-hero-star--1 {
+  top: 18px;
+  left: 60%;
+  font-size: 48px;
+  color: var(--tut-orange);
+  transform: rotate(15deg);
+}
+
+.tut-hero-star--2 {
+  bottom: 20px;
+  left: 55%;
+  font-size: 60px;
+  color: var(--tut-blue-dark);
+  transform: rotate(-15deg);
+}
+
+.tut-hero-star--3 {
+  top: 50%;
+  right: 30px;
+  font-size: 36px;
+  color: var(--tut-ink);
+  opacity: 0.15;
+  transform: translateY(-50%);
+}
+
+/* ── Contenido textual ─────────────────────────────────────── */
+.tut-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.tut-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 18px;
+  padding: 8px 15px;
+
+  background: white;
+  border: 2px solid var(--tut-ink);
+  border-radius: 7px;
+  box-shadow: var(--tut-shadow-sm);
+
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  transform: rotate(-2deg);
+  transform-origin: left center;
+}
+
+.tut-hero-eyebrow-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--tut-orange);
+  border: 1.5px solid var(--tut-ink);
+  flex-shrink: 0;
+}
+
+.tut-hero-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0 8px;
+  font-family: var(--font-display, "Baloo 2", sans-serif);
+  font-size: clamp(50px, 7vw, 95px);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -4px;
+  margin-bottom: 22px;
+}
+
+.tut-hero-word--1 {
+  color: var(--tut-ink);
+  transform: rotate(-4deg);
+  transform-origin: left bottom;
+  display: inline-block;
+}
+
+.tut-hero-word--2 {
+  color: var(--tut-orange);
+  -webkit-text-stroke: 2px var(--tut-ink);
+  text-shadow: 4px 4px 0 var(--tut-ink);
+  transform: rotate(2deg);
+  transform-origin: right bottom;
+  display: inline-block;
+}
+
+.tut-hero-subtitle {
+  max-width: 460px;
+  margin-bottom: 28px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+/* Badges de nivel — igual que hero-eyebrow pero sin emoji */
+.tut-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tut-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 2px solid var(--tut-ink);
+  border-radius: 7px;
+  box-shadow: var(--tut-shadow-sm);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.tut-hero-badge-icon {
+  /* Contenedor cuadrado para la letra/icono de texto */
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display, sans-serif);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.tut-hero-badge--orange {
+  background: var(--tut-orange-light);
+  transform: rotate(-1.5deg);
+}
+
+.tut-hero-badge--blue {
+  background: white;
+  transform: rotate(0.8deg);
+}
+
+.tut-hero-badge--purple {
+  background: var(--tut-purple-light);
+  transform: rotate(-0.8deg);
+}
+
+/* ── Ilustración derecha — igual que game-board / art-sticker ── */
+.tut-hero-art {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 340px;
+}
+
+/* Sticker rotado — igual que art-sticker */
+.tut-art-sticker {
+  position: absolute;
+  top: 20px;
+  left: -10px;
+  z-index: 4;
+
+  width: 90px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--tut-orange-light);
+  border: 3px solid var(--tut-ink);
+  border-radius: 50%;
+  box-shadow: var(--tut-shadow);
+  transform: rotate(-13deg);
+}
+
+.tut-art-sticker span {
+  font-family: var(--font-display, sans-serif);
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.tut-art-sticker small {
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+/* Mini tablero decorativo — igual que game-board */
+.tut-art-board {
+  position: relative;
+  z-index: 2;
+  width: 320px;
+  padding: 15px;
+
+  background: var(--tut-cream-light);
+  border: 4px solid var(--tut-ink);
+  border-radius: 15px;
+  box-shadow: 10px 10px 0 var(--tut-ink);
+  transform: rotate(-5deg);
+  transition: transform 0.3s ease;
+}
+
+.tut-art-board:hover {
+  transform: rotate(-2deg) translateY(-6px);
+}
+
+.tut-art-board-top,
+.tut-art-board-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-display, sans-serif);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.tut-art-board-top { margin-bottom: 12px; }
+.tut-art-board-bottom { margin-top: 12px; }
+
+.tut-art-board-badge {
+  padding: 3px 10px;
+  background: var(--tut-orange-light);
+  border: 2px solid var(--tut-ink);
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.tut-art-board-level {
+  color: var(--tut-blue-dark);
+}
+
+.tut-art-board-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  padding: 8px;
+  background: #D9C9A9;
+  border: 3px solid var(--tut-ink);
+  border-radius: 8px;
+}
+
+.tut-art-cell {
+  aspect-ratio: 1;
+  background: #F4E3BF;
+  border: 2px solid rgba(36, 36, 42, 0.3);
+  border-radius: 4px;
+}
+
+.tut-art-cell--active {
+  background: var(--tut-blue-mid);
+  border-color: var(--tut-ink);
+  box-shadow: 2px 2px 0 var(--tut-ink);
+}
+
+.tut-art-cell--main {
+  background: var(--tut-orange);
+  border-radius: 50%;
+}
+
+/* Tarjetas flotantes — igual que art-floating-card */
+.tut-art-card {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 13px;
+  border: 3px solid var(--tut-ink);
+  border-radius: 9px;
+  box-shadow: var(--tut-shadow);
+  font-family: var(--font-display, sans-serif);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.tut-art-card--blue {
+  right: -15px;
+  bottom: 70px;
+  background: var(--tut-blue-mid);
+  transform: rotate(6deg);
+}
+
+.tut-art-card--orange {
+  left: -5px;
+  bottom: 30px;
+  background: var(--tut-orange-light);
+  transform: rotate(-7deg);
+}
+
+.tut-art-card span:first-child {
+  font-size: 18px;
+}
+
+/* Flecha decorativa — igual que art-arrow */
+.tut-art-arrow {
+  position: absolute;
+  top: 95px;
+  right: -5px;
+  font-size: 50px;
+  font-weight: 900;
+  transform: rotate(-25deg);
+  color: var(--tut-ink);
+}
+
+/* Barra de colores inferior — igual que hero-bottom-decoration */
+.tut-hero-stripe {
+  display: flex;
+  height: 13px;
+}
+
+.tut-hero-stripe span { flex: 1; }
+.tut-hero-stripe span:nth-child(1) { background: var(--tut-orange); }
+.tut-hero-stripe span:nth-child(2) { background: var(--tut-blue-mid); }
+.tut-hero-stripe span:nth-child(3) { background: var(--tut-blue-dark); }
+
+/* ============================================================
+   2. RUTA DE APRENDIZAJE
+   ============================================================ */
+
+.tut-path {
+  padding-block: 65px;
+}
+
+/* Encabezado de cada nivel */
+.tut-level-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.tut-level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 20px;
+  font-family: var(--font-display, sans-serif);
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  border: 3px solid var(--tut-ink);
+  border-radius: 10px;
+  box-shadow: var(--tut-shadow-sm);
+}
+
+.tut-level-badge-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display, sans-serif);
+  font-size: 16px;
+  font-weight: 900;
+  background: white;
+  border: 2px solid var(--tut-ink);
+  border-radius: 5px;
+}
+
+.tut-level-badge--orange { background: var(--tut-orange);       transform: rotate(-1.5deg); }
+.tut-level-badge--blue   { background: var(--tut-blue-mid);     transform: rotate(1deg); }
+.tut-level-badge--purple { background: var(--tut-purple-light); transform: rotate(-0.8deg); }
+
+.tut-level-subtitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #56525c;
+}
+
+/* Cuadrícula: 3 col → 2 → 1 */
+.tut-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-bottom: 50px;
+}
+
+/* ── Conector entre niveles ────────────────────────────────── */
+.tut-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-block: 10px 20px;
+}
+
+.tut-connector-line {
+  width: 4px;
+  height: 20px;
+  border-radius: 2px;
+}
+
+.tut-connector-line--orange { background: var(--tut-orange); }
+.tut-connector-line--blue   { background: var(--tut-blue-mid); }
+.tut-connector-line--purple { background: var(--tut-purple); }
+
+.tut-connector-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.tut-connector-dots span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--tut-ink);
+  opacity: 0.2;
+  animation: tut-dot-pulse 1.6s ease-in-out infinite;
+}
+
+.tut-connector-dots span:nth-child(2) { animation-delay: 0.2s; }
+.tut-connector-dots span:nth-child(3) { animation-delay: 0.4s; }
+.tut-connector-dots span:nth-child(4) { animation-delay: 0.6s; }
+.tut-connector-dots span:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes tut-dot-pulse {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50%       { opacity: 0.75; transform: scale(1.3); }
+}
+
+.tut-connector-arrow {
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.tut-connector-arrow--blue   { color: var(--tut-blue-dark); }
+.tut-connector-arrow--purple { color: var(--tut-purple); }
+
+/* ============================================================
+   3. TARJETA DE TUTORIAL
+   ============================================================ */
+
+.tut-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--tut-cream-light);
+  border: 3px solid var(--tut-ink);
+  border-radius: var(--tut-radius);
+  box-shadow: var(--tut-shadow);
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tut-card:hover {
+  transform: translate(-3px, -4px) rotate(-0.8deg);
+  box-shadow: 8px 9px 0 var(--tut-ink);
+}
+
+.tut-card:active {
+  transform: translate(2px, 2px) scale(0.98);
+  box-shadow: 2px 2px 0 var(--tut-ink);
+}
+
+.tut-card:focus-visible {
+  outline: 4px solid var(--tut-blue);
+  outline-offset: 4px;
+}
+
+/* Sticker de número — igual que learning-card-number */
+.tut-card-number {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tut-yellow);
+  border: 2px solid var(--tut-ink);
+  border-radius: 7px;
+  box-shadow: 2px 2px 0 var(--tut-ink);
+  font-family: var(--font-display, sans-serif);
+  font-size: 13px;
+  font-weight: 900;
+  transform: rotate(-5deg);
+}
+
+/* Arte / imagen */
+.tut-card-art {
+  position: relative;
+  height: 145px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tut-card--orange .tut-card-art { background: var(--tut-orange-pale); }
+.tut-card--blue   .tut-card-art { background: var(--tut-blue-light); }
+.tut-card--purple .tut-card-art { background: var(--tut-purple-light); }
+
+.tut-card-art-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Placeholder CSS — mismo estilo que composition-art */
+.tut-card-art-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tut-ph-circle {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 3px dashed var(--tut-ink);
+  border-radius: 50%;
+  opacity: 0.25;
+}
+
+/* Forma central — igual que mini-unit del Inicio */
+.tut-ph-shape {
+  position: relative;
+  z-index: 1;
+  width: 60px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--tut-ink);
+  border-radius: 12px 12px 5px 5px;
+  box-shadow: 4px 4px 0 var(--tut-ink);
+  font-family: var(--font-display, sans-serif);
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.tut-ph-shape--orange { background: var(--tut-orange-light); }
+.tut-ph-shape--blue   { background: var(--tut-blue-mid); }
+.tut-ph-shape--purple { background: var(--tut-purple-light); }
+
+.tut-ph-star {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--tut-ink);
+  opacity: 0.3;
+}
+
+/* Cuerpo de la tarjeta */
+.tut-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  gap: 10px;
+}
+
+.tut-card-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tut-card-title {
+  margin: 0;
+  font-family: var(--font-display, sans-serif);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.tut-card-desc {
+  flex: 1;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #5a5660;
+}
+
+/* Botón decorativo — igual que learning-link */
+.tut-card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  margin-top: auto;
+  background: var(--tut-ink);
+  color: white;
+  border-radius: 4px;
+  font-family: var(--font-display, sans-serif);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tut-card--orange:hover .tut-card-cta { background: var(--tut-orange);   color: var(--tut-ink); }
+.tut-card--blue:hover   .tut-card-cta { background: var(--tut-blue-mid); color: var(--tut-ink); }
+.tut-card--purple:hover .tut-card-cta { background: var(--tut-purple);   color: white; }
+
+/* ============================================================
+   4. PÍLDORAS (tarjeta y panel)
+   ============================================================ */
+
+.tut-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border: 2px solid var(--tut-ink);
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.tut-pill--orange { background: var(--tut-orange-light); }
+.tut-pill--blue   { background: var(--tut-blue-light); }
+.tut-pill--purple { background: var(--tut-purple-light); }
+.tut-pill--time   { background: white; }
+
+/* ============================================================
+   5. PANEL DE LECTURA
+   ============================================================ */
+
+.tut-panel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(20, 18, 35, 0.78);
+  backdrop-filter: blur(5px);
+  overflow-y: auto;
+  animation: tut-fade-in 0.2s ease;
+}
+
+@keyframes tut-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.tut-panel {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: var(--tut-cream-light);
+  color: var(--tut-ink);
+  border: var(--tut-border-thick);
+  border-radius: 10px;
+  box-shadow: 10px 10px 0 var(--tut-ink);
+  animation: tut-bounce-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes tut-bounce-in {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Borde superior de color según nivel */
+.tut-panel--orange { border-top: 7px solid var(--tut-orange); }
+.tut-panel--blue   { border-top: 7px solid var(--tut-blue-mid); }
+.tut-panel--purple { border-top: 7px solid var(--tut-purple); }
+
+/* ── Botón cerrar — igual que detail-close ─────────────────── */
+.tut-panel-close {
+  position: sticky;
+  top: 12px;
+  z-index: 10;
+  float: right;
+  width: 42px;
+  height: 42px;
+  margin: 14px 14px -42px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tut-orange-light);
+  color: var(--tut-ink);
+  border: 3px solid var(--tut-ink);
+  border-radius: 7px;
+  box-shadow: var(--tut-shadow-sm);
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.tut-panel-close:hover  { transform: rotate(10deg) scale(1.08); }
+.tut-panel-close:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--tut-ink);
+}
+
+/* ── Encabezado del panel ──────────────────────────────────── */
+.tut-panel-header {
+  padding: 28px 32px 22px;
+  border-bottom: 3px solid var(--tut-ink);
+  background: var(--tut-cream);
+}
+
+.tut-panel-eyebrow {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #77717a;
+}
+
+.tut-panel-title {
+  margin: 0 0 14px;
+  font-family: var(--font-display, sans-serif);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -1.5px;
+}
+
+.tut-panel-accent--orange { color: var(--tut-orange); }
+.tut-panel-accent--blue   { color: var(--tut-blue); }
+.tut-panel-accent--purple { color: var(--tut-purple); }
+
+.tut-panel-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── Layout interior ───────────────────────────────────────── */
+.tut-panel-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 0;
+  min-height: 0;
+}
+
+/* Índice lateral */
+.tut-panel-index {
+  padding: 24px 18px;
+  border-right: 3px solid var(--tut-ink);
+  background: var(--tut-cream);
+  position: sticky;
+  top: 0;
+  align-self: start;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.tut-panel-index-title {
+  margin-bottom: 14px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #77717a;
+}
+
+.tut-panel-index ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tut-panel-index-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--tut-ink);
+  cursor: pointer;
+  line-height: 1.4;
+  transition: background 0.15s ease;
+}
+
+.tut-panel-index-link:hover {
+  background: var(--tut-blue-light);
+}
+
+/* Cuerpo del tutorial */
+.tut-panel-body {
+  padding: 32px 36px 40px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ============================================================
+   6. PRÓXIMAMENTE
+   ============================================================ */
+
+.tut-panel-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 55px 20px;
+  text-align: center;
+  min-height: 300px;
+}
+
+/* Decoración sin emoji: sunburst + sticker rotado */
+.tut-soon-decoration {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tut-soon-sunburst {
+  position: absolute;
+  inset: 0;
+  background: var(--tut-yellow);
+  clip-path: polygon(
+    50% 0%, 60% 13%, 75% 5%, 78% 22%,
+    96% 25%, 88% 42%, 100% 55%, 84% 65%,
+    91% 83%, 72% 82%, 63% 100%, 50% 86%,
+    35% 100%, 29% 81%, 9% 83%, 17% 65%,
+    0% 54%, 14% 41%, 5% 23%, 25% 22%,
+    31% 5%, 43% 14%
+  );
+  opacity: 0.6;
+}
+
+.tut-soon-sticker {
+  position: relative;
+  z-index: 1;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--tut-cream-light);
+  border: 3px solid var(--tut-ink);
+  border-radius: 50%;
+  box-shadow: var(--tut-shadow);
+  transform: rotate(-10deg);
+}
+
+.tut-soon-sticker span {
+  font-family: var(--font-display, sans-serif);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.tut-soon-sticker small {
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.tut-soon-star {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--tut-orange);
+  -webkit-text-stroke: 1px var(--tut-ink);
+}
+
+.tut-panel-soon h3 {
+  font-family: var(--font-display, sans-serif);
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.tut-panel-soon p {
+  max-width: 400px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.65;
+  color: #5a5660;
+}
+
+/* Sticker de texto — igual que quick-label del Inicio */
+.tut-soon-tag {
+  display: inline-block;
+  padding: 8px 18px;
+  background: var(--tut-yellow);
+  border: 3px solid var(--tut-ink);
+  border-radius: 8px;
+  box-shadow: var(--tut-shadow-sm);
+  font-family: var(--font-display, sans-serif);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  transform: rotate(-2deg);
+}
+
+/* ============================================================
+   7. BLOQUES DE CONTENIDO
+   ============================================================ */
+
+/* Título secundario */
+.tut-block-heading {
+  margin: 6px 0 0;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed rgba(36, 36, 42, 0.18);
+  font-family: var(--font-display, sans-serif);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  scroll-margin-top: 24px;
+}
+
+/* Párrafo */
+.tut-block-text {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.75;
+}
+
+/* Lista */
+.tut-block-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tut-block-list li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+.tut-block-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--tut-orange);
+  font-weight: 900;
+}
+
+/* Pasos numerados */
+.tut-block-steps {
+  background: var(--tut-cream);
+  border: 3px solid var(--tut-ink);
+  border-radius: 8px;
+  padding: 20px 22px;
+  box-shadow: var(--tut-shadow-sm);
+}
+
+.tut-block-steps-title {
+  margin: 0 0 14px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #77717a;
+}
+
+.tut-block-steps ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tut-block-steps ol li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* Número del paso — igual que board-round del Inicio */
+.tut-block-step-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tut-orange);
+  border: 2px solid var(--tut-ink);
+  border-radius: 7px;
+  box-shadow: 2px 2px 0 var(--tut-ink);
+  font-family: var(--font-display, sans-serif);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+/* Badges de tipo — igual que quick-label del Inicio */
+.tut-block-badge {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.tut-block-badge--key {
+  background: var(--tut-ink);
+  color: var(--tut-yellow);
+}
+
+.tut-block-badge--mistake {
+  background: #C0392B;
+  color: white;
+}
+
+/* Dato clave — sticker amarillo */
+.tut-block-keytip {
+  padding: 18px 20px;
+  background: var(--tut-yellow);
+  border: 3px solid var(--tut-ink);
+  border-radius: 8px;
+  box-shadow: var(--tut-shadow-sm);
+  transform: rotate(-0.4deg);
+}
+
+.tut-block-keytip p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+/* Error común — sticker rojo */
+.tut-block-mistake {
+  padding: 18px 20px;
+  background: #FFE5D0;
+  border: 3px solid #C0392B;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 #C0392B;
+  transform: rotate(0.3deg);
+}
+
+.tut-block-mistake p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+/* Imagen con caption */
+.tut-block-image { margin: 0; }
+
+.tut-block-image-frame {
+  position: relative;
+  width: 100%;
+  min-height: 180px;
+  overflow: hidden;
+  background: var(--tut-blue-light);
+  border: 3px solid var(--tut-ink);
+  border-radius: 8px;
+  box-shadow: var(--tut-shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tut-block-image-frame img { width: 100%; display: block; }
+
+/* Placeholder CSS — igual que composition-art */
+.tut-block-image-ph {
+  position: absolute;
+  inset: 0;
+  display: none;          /* activa con JS si falla la img */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.tut-block-image-ph .tut-ph-circle {
+  width: 80px;
+  height: 80px;
+}
+
+.tut-block-image-ph small {
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(36, 36, 42, 0.45);
+  word-break: break-all;
+}
+
+.tut-block-image-caption {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #77717a;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Tabla */
+.tut-block-table-wrap {
+  overflow-x: auto;
+  border: 3px solid var(--tut-ink);
+  border-radius: 8px;
+  box-shadow: var(--tut-shadow-sm);
+}
+
+.tut-block-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tut-block-table thead tr {
+  background: var(--tut-ink);
+  color: white;
+}
+
+.tut-block-table th {
+  padding: 10px 14px;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tut-block-table td {
+  padding: 9px 14px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(36, 36, 42, 0.12);
+  line-height: 1.5;
+}
+
+.tut-block-table tbody tr:last-child td { border-bottom: none; }
+.tut-block-table tbody tr:nth-child(even) { background: var(--tut-cream); }
+
+/* Glosario — neo-brutalista */
+.tut-block-glossary {
+  border: 3px solid var(--tut-ink);
+  border-radius: 8px;
+  box-shadow: var(--tut-shadow-sm);
+  overflow: hidden;
+}
+
+.tut-block-glossary-title {
+  margin: 0;
+  padding: 10px 15px;
+  background: var(--tut-ink);
+  color: white;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.tut-block-glossary-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0;
+}
+
+.tut-glossary-entry {
+  padding: 12px 16px;
+  border-bottom: 2px solid rgba(36, 36, 42, 0.12);
+  border-right: 2px solid rgba(36, 36, 42, 0.12);
+}
+
+.tut-glossary-term {
+  display: inline-block;
+  margin-bottom: 5px;
+  padding: 2px 8px;
+  background: var(--tut-blue-mid);
+  border: 1.5px solid var(--tut-ink);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.tut-glossary-def {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.55;
+  color: #3a3640;
+}
+
+/* ============================================================
+   8. NAVEGACIÓN PREV / NEXT
+   ============================================================ */
+
+.tut-panel-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding-top: 28px;
+  margin-top: 20px;
+  border-top: 3px dashed rgba(36, 36, 42, 0.18);
+}
+
+.tut-panel-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--tut-cream);
+  border: 3px solid var(--tut-ink);
+  border-radius: 8px;
+  box-shadow: var(--tut-shadow-sm);
+  font-size: 13px;
+  color: var(--tut-ink);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.tut-panel-nav-btn:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--tut-ink);
+  background: var(--tut-blue-light);
+}
+
+.tut-panel-nav-btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--tut-ink);
+}
+
+.tut-panel-nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.tut-panel-nav-btn--prev { flex-direction: row; text-align: left; }
+.tut-panel-nav-btn--next { flex-direction: row-reverse; text-align: right; }
+
+.tut-nav-arrow {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.tut-nav-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.tut-nav-text small {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #77717a;
+}
+
+.tut-nav-text strong {
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tut-nav-empty {
+  font-size: 12px;
+  font-weight: 600;
+  color: #aaa;
+}
+
+/* ============================================================
+   9. MINI QUIZ
+   ============================================================ */
+
+.tut-quiz {
+  margin-top: 20px;
+  padding: 24px;
+  background: var(--tut-cream);
+  border: 3px solid var(--tut-ink);
+  border-radius: 10px;
+  box-shadow: var(--tut-shadow-sm);
+}
+
+.tut-quiz-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+/* Sticker del quiz — igual que art-sticker pero pequeño */
+.tut-quiz-header-sticker {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--tut-blue-mid);
+  border: 3px solid var(--tut-ink);
+  border-radius: 50%;
+  box-shadow: var(--tut-shadow-sm);
+  transform: rotate(-10deg);
+  flex-shrink: 0;
+}
+
+.tut-quiz-header-sticker span {
+  font-family: var(--font-display, sans-serif);
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.tut-quiz-header-sticker small {
+  font-size: 7px;
+  font-weight: 900;
+}
+
+.tut-quiz-header h3 {
+  margin: 0;
+  font-family: var(--font-display, sans-serif);
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.tut-quiz-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.tut-quiz-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tut-quiz-question {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.tut-quiz-qnum {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tut-ink);
+  color: white;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.tut-quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tut-quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  width: 100%;
+  text-align: left;
+  background: white;
+  border: 2px solid var(--tut-ink);
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 var(--tut-ink);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tut-ink);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tut-quiz-option:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--tut-ink);
+  background: var(--tut-cream);
+}
+
+.tut-quiz-option:disabled { cursor: default; }
+
+.tut-quiz-option--selected  { background: var(--tut-blue-light); border-color: var(--tut-blue); }
+.tut-quiz-option--correct   { background: #D4F5E0; border-color: #27834c; box-shadow: 2px 2px 0 #27834c; }
+.tut-quiz-option--wrong     { background: #FFE0E0; border-color: #C0392B; box-shadow: 2px 2px 0 #C0392B; }
+
+/* Insignia de letra — sin emoji */
+.tut-quiz-opt-letter {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tut-ink);
+  color: white;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.tut-quiz-confirm {
+  align-self: flex-start;
+  padding: 9px 18px;
+  background: var(--tut-orange);
+  border: 2px solid var(--tut-ink);
+  border-radius: 6px;
+  box-shadow: var(--tut-shadow-sm);
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--tut-ink);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tut-quiz-confirm:hover:not(:disabled)  { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--tut-ink); }
+.tut-quiz-confirm:active:not(:disabled) { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--tut-ink); }
+.tut-quiz-confirm:disabled              { opacity: 0.4; cursor: not-allowed; }
+
+.tut-quiz-feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 15px;
+  border: 2px solid var(--tut-ink);
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.tut-quiz-feedback--ok   { background: #D4F5E0; border-color: #27834c; }
+.tut-quiz-feedback--fail { background: #FFE0E0; border-color: #C0392B; }
+
+/* Badge de resultado — texto, sin emoji */
+.tut-quiz-result-badge {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.tut-quiz-feedback--ok   .tut-quiz-result-badge { color: #27834c; }
+.tut-quiz-feedback--fail .tut-quiz-result-badge { color: #C0392B; }
+
+/* ============================================================
+   10. RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .tut-hero-inner {
+    grid-template-columns: 1fr;
+    padding-block: 36px 44px;
+  }
+
+  .tut-hero-sunburst,
+  .tut-hero-circle { display: none; }
+
+  .tut-hero-art { display: none; }
+
+  .tut-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .tut-panel-layout { grid-template-columns: 1fr; }
+
+  /* Índice en modo horizontal compacto */
+  .tut-panel-index {
+    position: static;
+    max-height: none;
+    border-right: none;
+    border-bottom: 3px solid var(--tut-ink);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  .tut-panel-index ol {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tut-panel-index-link {
+    padding: 5px 10px;
+    background: var(--tut-cream);
+    border: 1.5px solid var(--tut-ink);
+    border-radius: 20px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .tut-panel-index-link:hover { background: var(--tut-blue-mid); }
+
+  /* Glossary en mobile */
+  .tut-block-glossary-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .tut-hero { padding: 0; }
+
+  .tut-hero-inner {
+    width: 92%;
+    padding-block: 28px 36px;
+  }
+
+  .tut-hero-title {
+    font-size: clamp(44px, 14vw, 70px);
+    letter-spacing: -2px;
+  }
+
+  .tut-grid { grid-template-columns: 1fr; }
+
+  .tut-panel { max-height: 95vh; }
+
+  .tut-panel-header { padding: 20px 18px 16px; }
+
+  .tut-panel-body {
+    padding: 20px 18px 30px;
+    gap: 18px;
+  }
+
+  .tut-panel-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .tut-panel-nav-btn--next {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .tut-block-heading { font-size: 19px; }
+  .tut-quiz          { padding: 16px; }
+}
+
+@media (max-width: 420px) {
+  .tut-hero-badges   { flex-direction: column; align-items: flex-start; }
+  .tut-level-header  { flex-direction: column; align-items: flex-start; }
+}

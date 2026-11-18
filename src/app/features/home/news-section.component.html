@@ -1,0 +1,51 @@
+<section class="news-section"
+  ><div class="news-container"
+    ><div class="news-header"
+      ><div
+        ><span class="news-label">ACTUALIDAD</span><h2>LAS NOTICIAS<span> DEL SET</span></h2
+        ><p>Mantente al día con los últimos parches, sets y eventos de Teamfight Tactics.</p></div
+      ><div class="news-header-decoration" aria-hidden="true"
+        ><span>HOT!</span><div class="news-header-star">✦</div></div
+      ></div
+    ><div class="ns-sets-grid">
+      @for (s of newsSets; track $index) {
+        @let isActual = s.status === 'ACTUAL';@let color = isActual ? 'orange' : 'blue';
+
+        <article [class]="'ns-set-card ns-set-card--' + color"
+          ><div [class]="'ns-set-visual ns-set-visual--' + color">
+            @if (s.image) {
+              <img [src]="s.image" [alt]="s.name" class="ns-set-img" (error)="hideImage($event)" />
+            } @else {}
+            <span class="ns-set-ph-num">{{ s.number }}</span
+            ><span [class]="'ns-set-status ns-set-status--' + color">{{ s.status }}</span></div
+          ><div class="ns-set-body"
+            ><span class="ns-set-label">SET {{ s.number }}</span
+            ><h3 class="ns-set-name">{{ s.name }}</h3
+            ><p class="ns-set-theme">{{ s.theme }}</p
+            ><p class="ns-set-summary">{{ s.summary.substring(0, 120) }}…</p
+            ><div class="ns-set-footer"
+              ><span class="ns-set-date"
+                >{{ isActual ? 'Desde el' : 'Previsto:' }}&#32;<strong>{{
+                  s.releaseDate
+                }}</strong></span
+              ><a
+                [routerLink]="isActual ? '/noticias' : '/noticias'"
+                [fragment]="isActual ? undefined : 'set-19'"
+                [class]="'ns-set-btn ns-set-btn--' + color"
+                >VER NOTICIAS <span aria-hidden="true">↗</span></a
+              ></div
+            ></div
+          ></article
+        >
+      }</div
+    ><div class="news-bottom"
+      ><div
+        ><span class="news-bottom-icon">✦</span
+        ><div
+          ><strong>¿QUIERES ESTAR AL DÍA?</strong
+          ><p>Explora todos los parches, sets y eventos de TFT.</p></div
+        ></div
+      ><a routerLink="/noticias" class="btn btn-orange">VER TODAS LAS NOTICIAS ↗</a></div
+    ></div
+  ></section
+>

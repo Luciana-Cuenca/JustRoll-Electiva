@@ -1,0 +1,193 @@
+<div
+  jrModal
+  (modalClose)="close.emit()"
+  class="detail-overlay"
+  (click)="close.emit()"
+  role="presentation"
+  ><section
+    class="detail-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="detail-title"
+    (click)="$event.stopPropagation()"
+    ><button class="detail-close" type="button" (click)="close.emit()" aria-label="Cerrar detalle"
+      >×</button
+    ><header class="detail-header"
+      ><div
+        ><span class="detail-eyebrow">GUÍA DE COMPOSICIÓN</span
+        ><h2 id="detail-title">{{ composition.name }}</h2
+        ><div class="detail-tags"
+          ><span>{{ composition.gameMode }}</span
+          ><span>{{ composition.difficulty }}</span
+          ><span>RANGO {{ composition.tier }}</span>
+          @if (composition.requirement) {
+            <span class="detail-tag-requirement">★ {{ composition.requirement }}</span>
+          }
+        </div></div
+      ></header
+    ><div class="detail-layout"
+      ><aside class="detail-sidebar"
+        ><div class="detail-banner"
+          ><div class="detail-banner-frame">
+            @if (composition.image) {
+              <img
+                [src]="composition.image"
+                [alt]="composition.name"
+                class="detail-banner-img"
+                (error)="hideImage($event)"
+              />
+            }</div
+          ><div class="detail-banner-info"
+            ><span class="detail-banner-tier">RANGO {{ composition.tier }}</span
+            ><h4>{{ composition.name }}</h4
+            ><p>{{ composition.category }}</p></div
+          ></div
+        ><section class="detail-info-box"
+          ><h3>DESCRIPCIÓN</h3
+          ><p>{{
+            composition.longDescription || composition.description || 'Próximamente.'
+          }}</p></section
+        ><section class="detail-info-box"
+          ><h3>AUMENTOS RECOMENDADOS</h3>
+          @if ((composition.augments?.length ?? 0) > 0) {
+            <div class="detail-augments-list">
+              @for (aug of composition.augments; track $index; let index = $index) {
+                <div class="detail-augment-row" [title]="aug.name"
+                  ><div class="detail-augment-icon"
+                    ><img [src]="aug.image" [alt]="aug.name" (error)="hideImage($event)" /></div
+                  ><span class="detail-augment-name">{{ aug.name }}</span></div
+                >
+              }
+            </div>
+          } @else {
+            <p class="detail-coming-soon">Próximamente.</p>
+          }
+        </section>
+        @if ((composition.keyEmblems?.length ?? 0) > 0) {
+          <section class="detail-info-box detail-emblems-box"
+            ><h3>EMBLEMAS CLAVE</h3
+            ><div class="detail-emblems-list">
+              @for (emblem of composition.keyEmblems; track $index; let index = $index) {
+                <div class="detail-emblem-card"
+                  ><div class="detail-emblem-icon"
+                    ><img
+                      [src]="emblem.image"
+                      [alt]="emblem.name"
+                      (error)="hideImage($event)" /></div
+                  ><div class="detail-emblem-info"
+                    ><strong>{{ emblem.name }}</strong
+                    ><small>{{ emblem.role }}</small></div
+                  ></div
+                >
+              }
+            </div></section
+          >
+        }
+        <section class="detail-info-box"
+          ><h3>MEJORAS RECOMENDADAS</h3>
+          @if ((composition.recommendedUpgrades?.length ?? 0) > 0) {
+            <ul class="detail-upgrades-list">
+              @for (upgrade of composition.recommendedUpgrades; track $index; let index = $index) {
+                <li class="detail-upgrade-item"
+                  ><span class="detail-upgrade-bullet">✦</span><span>{{ upgrade }}</span></li
+                >
+              }
+            </ul>
+          } @else {
+            <p class="detail-coming-soon">Próximamente.</p>
+          }
+        </section>
+        @if (composition.tip) {
+          <div class="detail-tip-sticker"
+            ><div class="detail-tip-badge"
+              ><span>CONSEJO</span><span aria-hidden="true">★</span></div
+            ><p>{{ composition.tip }}</p></div
+          >
+        }</aside
+      ><div class="detail-main"
+        ><section class="detail-panel"
+          ><header class="detail-panel-header"
+            ><div
+              ><h3>CAMPEONES DE LA COMPOSICIÓN</h3
+              ><p>Alineación final recomendada para nivel 8 o 9.</p></div
+            ><span class="detail-count-badge">{{ finalChampions.length }} CAMPEONES</span></header
+          ><div class="detail-champions-list">
+            @for (champion of finalChampions; track $index) {
+              <jr-champion-portrait [champion]="champion"></jr-champion-portrait>
+            }</div></section
+        ><div class="detail-bottom-grid"
+          ><section class="detail-panel"
+            ><header class="detail-panel-header"
+              ><div
+                ><h3>CAMPEONES INICIALES</h3><p>Mesa de juego temprano para hacer racha.</p></div
+              ></header
+            ><div class="detail-champions-list">
+              @for (champion of startingChampions; track $index) {
+                <jr-champion-portrait [champion]="champion"></jr-champion-portrait>
+              }</div></section
+          ><section class="detail-panel"
+            ><header class="detail-panel-header"
+              ><div
+                ><h3>OBJETOS RECOMENDADOS</h3
+                ><p>Prioridad de armado para carries y tanques.</p></div
+              ></header
+            ><jr-item-list [items]="composition.recommendedItems ?? []"></jr-item-list></section
+        ></div>
+        @if ((composition.championRoles?.length ?? 0) > 0) {
+<section class="detail-panel">
+<header class="detail-panel-header"><div><h3>ROLES Y PRIORIDAD DE OBJETOS</h3><p>Distribución de ítems clave entre los campeones.</p></div></header>
+<div class="detail-roles-grid">
+@for (roleInfo of composition.championRoles; track $index) {
+ @if (championMap.get(roleInfo.championId); as champ) {
+ <div class="detail-role-card">
+  <div class="detail-role-champion">
+   <div [class]="'detail-role-avatar ' + (costColors[champ.cost] || 'hex-cost-special')">
+   @if (champ.image) {<img [src]="champ.image" [alt]="champ.name" (error)="hideImage($event)" />}
+   </div>
+   <div class="detail-role-meta"><strong>{{ champ.name }}</strong><span class="detail-role-badge">{{ roleInfo.role }}</span></div>
+  </div>
+  <div class="detail-role-items">
+  @if (roleInfo.items.length > 0) {
+   @for (itemId of roleInfo.items; track $index) {
+    @let itemObj = itemMap.get(itemId);
+    @let itemName = itemObj ? itemObj.name : itemId;
+    @let itemImg = itemObj ? itemObj.image : '/images/items/' + itemId + '.png';
+    <div class="detail-role-item-slot" [title]="itemName"><img [src]="itemImg" [alt]="itemName" (error)="hideImage($event)" /></div>
+   }
+  } @else {<span class="detail-role-empty-items">{{ roleInfo.note || 'Sin ítems fijos' }}</span>}
+  </div>
+ </div>
+ }
+}
+</div>
+</section>
+}
+        @if (hasBoard) {
+          <div class="detail-board-wrapper"
+            ><jr-hex-board
+              [units]="composition.board ?? []"
+              [activeTraits]="composition.activeTraits || []"
+            ></jr-hex-board
+          ></div>
+        }
+        @if ((composition.strategySteps?.length ?? 0) > 0) {
+          <section class="detail-panel"
+            ><header class="detail-panel-header"
+              ><div
+                ><h3>ESTRATEGIA PASO A PASO</h3
+                ><p>Guía de toma de decisiones durante la partida.</p></div
+              ></header
+            ><ol class="detail-strategy-steps">
+              @for (step of composition.strategySteps; track $index; let index = $index) {
+                <li class="detail-strategy-step"
+                  ><span class="detail-step-number">{{ index + 1 }}</span
+                  ><p>{{ step }}</p></li
+                >
+              }
+            </ol></section
+          >
+        }
+      </div></div
+    ></section
+  ></div
+>

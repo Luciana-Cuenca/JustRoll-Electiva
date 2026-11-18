@@ -1,0 +1,31 @@
+<section class="hex-board-section"
+  ><h3 class="hex-board-title">POSICIONAMIENTO</h3>
+  @if (activeTraits.length > 0) {
+    <div class="hex-active-traits">
+      @for (trait of activeTraits; track $index) {
+        <div [class]="'hex-trait-chip hex-trait-' + (trait.level || 'silver')" [title]="trait.name">
+          @if (trait.icon) {
+            <img [src]="trait.icon" alt="" />
+          }
+          <span>{{ trait.count }}</span></div
+        >
+      }
+    </div>
+  }
+  <div class="hex-board-scroll"
+    ><div class="hex-board-grid">
+      @for (row of sequence(ROWS); track row) {
+        <div [class]="'hex-board-row ' + (row % 2 === 1 ? 'hex-board-row-offset' : '')">
+          @for (col of sequence(COLUMNS); track col) {
+            @let unit = occupiedCells.get(row + '-' + col);
+            <div class="hex-cell">
+              @if (unit) {
+                <jr-hex-unit [unit]="unit"></jr-hex-unit>
+              } @else {
+                <div class="hex-empty-cell"></div>
+              }
+            </div>
+          }
+        </div>
+      }</div></div
+></section>
