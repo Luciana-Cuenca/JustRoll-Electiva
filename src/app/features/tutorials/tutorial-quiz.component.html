@@ -1,0 +1,59 @@
+<section class="tut-quiz" aria-label="Mini quiz"
+  ><div class="tut-quiz-header"
+    ><div class="tut-quiz-header-sticker" aria-hidden="true"><span>?</span><small>QUIZ</small></div
+    ><h3>Comprueba lo aprendido</h3></div
+  ><ol class="tut-quiz-list">
+    @for (q of questions; track $index; let qi = $index) {
+      @let isSubmitted = submitted[qi];@let selected = answers[qi];
+      @let isCorrect = selected === q.answer;
+      <li class="tut-quiz-item"
+        ><p class="tut-quiz-question"
+          ><span class="tut-quiz-qnum" aria-hidden="true">{{ qi + 1 }}</span
+          >{{ q.question }}</p
+        ><div
+          class="tut-quiz-options"
+          role="group"
+          [attr.aria-label]="'Opciones pregunta ' + (qi + 1)"
+        >
+          @for (opt of q.options; track $index; let oi = $index) {
+            <button
+              type="button"
+              [class]="optionClass(qi, oi)"
+              (click)="handleSelect(qi, oi)"
+              [disabled]="isSubmitted"
+              [attr.aria-pressed]="selected === oi"
+              ><span class="tut-quiz-opt-letter" aria-hidden="true">{{
+                String.fromCharCode(65 + oi)
+              }}</span
+              >{{ opt }}</button
+            >
+          }
+        </div>
+        @if (!isSubmitted) {
+          <button
+            type="button"
+            class="tut-quiz-confirm"
+            (click)="handleSubmit(qi)"
+            [disabled]="answers[qi] === undefined"
+            >Confirmar respuesta</button
+          >
+        }
+        @if (isSubmitted) {
+          <div
+            [class]="
+              'tut-quiz-feedback ' +
+              (isCorrect ? 'tut-quiz-feedback--ok' : 'tut-quiz-feedback--fail')
+            "
+            role="alert"
+            ><span class="tut-quiz-result-badge" aria-hidden="true">{{
+              isCorrect ? 'OK' : 'NO'
+            }}</span
+            ><span
+              >{{ isCorrect ? 'Correcto. ' : 'No es exactamente. ' }}{{ q.explanation }}</span
+            ></div
+          >
+        }
+      </li>
+    }
+  </ol></section
+>
