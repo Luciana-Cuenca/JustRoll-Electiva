@@ -1,0 +1,7 @@
+/* Keep the original cascade order to preserve the React application's appearance. */
+@import './styles/global.css';
+@import './styles/navbar.css';
+@import './styles/home.css';
+@import './styles/Compositions.css';
+@import './styles/tutorials.css';
+@import './styles/news.css';
