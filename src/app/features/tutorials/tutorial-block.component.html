@@ -1,0 +1,95 @@
+@switch (block.type) {
+  @case ('heading') {
+    <h3 class="tut-block-heading">{{ block.text }}</h3>
+  }
+  @case ('text') {
+    <p class="tut-block-text">{{ block.text }}</p>
+  }
+  @case ('list') {
+    <ul class="tut-block-list">
+      @for (item of block.items; track $index; let i = $index) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+  }
+  @case ('steps') {
+    <div class="tut-block-steps">
+      @if (block.title) {
+        <p class="tut-block-steps-title">{{ block.title }}</p>
+      }
+      <ol>
+        @for (item of block.items; track $index; let i = $index) {
+          <li
+            ><span class="tut-block-step-num">{{ i + 1 }}</span
+            ><span>{{ item }}</span></li
+          >
+        }
+      </ol></div
+    >
+  }
+  @case ('keyTip') {
+    <div class="tut-block-keytip"
+      ><span class="tut-block-badge tut-block-badge--key">! DATO CLAVE</span
+      ><p>{{ block.text }}</p></div
+    >
+  }
+  @case ('commonMistake') {
+    <div class="tut-block-mistake"
+      ><span class="tut-block-badge tut-block-badge--mistake">X ERROR COMUN</span
+      ><p>{{ block.text }}</p></div
+    >
+  }
+  @case ('image') {
+    <figure class="tut-block-image"
+      ><div class="tut-block-image-frame"
+        ><img [src]="block.src" [alt]="block.caption || ''" (error)="imageFallback($event)" /><div
+          class="tut-block-image-ph"
+          aria-hidden="true"
+          ><div class="tut-ph-circle"></div
+          ><div class="tut-ph-label"
+            ><small>{{ block.src }}</small></div
+          ></div
+        ></div
+      >
+      @if (block.caption) {
+        <figcaption class="tut-block-image-caption">{{ block.caption }}</figcaption>
+      }
+    </figure>
+  }
+  @case ('table') {
+    <div class="tut-block-table-wrap"
+      ><table class="tut-block-table"
+        ><thead
+          ><tr>
+            @for (h of block.headers; track $index; let i = $index) {
+              <th>{{ h }}</th>
+            }
+          </tr></thead
+        ><tbody>
+          @for (row of block.rows; track $index; let ri = $index) {
+            <tr>
+              @for (cell of row; track $index; let ci = $index) {
+                <td>{{ cell }}</td>
+              }
+            </tr>
+          }
+        </tbody></table
+      ></div
+    >
+  }
+  @case ('glossary') {
+    <div class="tut-block-glossary">
+      @if (block.title) {
+        <p class="tut-block-glossary-title">{{ block.title }}</p>
+      }
+      <dl class="tut-block-glossary-list">
+        @for (entry of block.items; track $index; let i = $index) {
+          <div class="tut-glossary-entry"
+            ><dt class="tut-glossary-term">{{ entry.term }}</dt
+            ><dd class="tut-glossary-def">{{ entry.definition }}</dd></div
+          >
+        }
+      </dl></div
+    >
+  }
+}
