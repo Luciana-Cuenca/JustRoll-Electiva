@@ -1,0 +1,103 @@
+<div
+  jrModal
+  (modalClose)="close.emit()"
+  class="tut-panel-overlay"
+  (click)="close.emit()"
+  role="presentation"
+  ><section
+    [class]="'tut-panel tut-panel--' + tutorial.color"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="tut-panel-title"
+    (click)="$event.stopPropagation()"
+    ><button
+      class="tut-panel-close"
+      type="button"
+      (click)="close.emit()"
+      aria-label="Cerrar tutorial"
+      >×</button
+    ><header class="tut-panel-header"
+      ><div class="tut-panel-eyebrow">TUTORIAL · RUTA DE APRENDIZAJE</div
+      ><h2 id="tut-panel-title" class="tut-panel-title"
+        ><span [class]="'tut-panel-accent tut-panel-accent--' + tutorial.color">{{
+          firstWord
+        }}</span
+        >{{ restWords ? ' ' + restWords : '' }}</h2
+      ><div class="tut-panel-pills"
+        ><span [class]="'tut-pill tut-pill--' + tutorial.color">{{
+          LEVEL_LABELS[tutorial.level]
+        }}</span
+        ><span class="tut-pill tut-pill--time">{{ tutorial.readingTime }} min de lectura</span></div
+      ></header
+    ><div class="tut-panel-layout">
+      @if (headings.length > 0) {
+        <nav class="tut-panel-index" aria-label="Índice del tutorial"
+          ><p class="tut-panel-index-title">EN ESTE TUTORIAL</p
+          ><ol>
+            @for (h of headings; track $index; let i = $index) {
+              <li
+                ><button type="button" class="tut-panel-index-link" (click)="scrollToHeading(i)">{{
+                  h.text
+                }}</button></li
+              >
+            }
+          </ol></nav
+        >
+      }
+      <div class="tut-panel-body">
+        @if (hasContent) {
+          @for (block of tutorial.content; track $index; let i = $index) {
+            <jr-tutorial-block [block]="block"></jr-tutorial-block>
+          }
+          @if (hasQuiz) {
+            <jr-tutorial-quiz [questions]="tutorial.quiz"></jr-tutorial-quiz>
+          }
+        } @else {
+          <div class="tut-panel-soon"
+            ><div class="tut-soon-decoration" aria-hidden="true"
+              ><div class="tut-soon-sunburst"></div
+              ><div class="tut-soon-sticker"><span>WIP</span><small>WORK IN PROGRESS</small></div
+              ><span class="tut-soon-star">★</span></div
+            ><h3>Próximamente</h3
+            ><p
+              >Este tutorial está en preparación. Vuelve pronto para aprender sobre&#32;<strong>{{
+                tutorial.title
+              }}</strong
+              >.</p
+            ><div class="tut-soon-tag">COMING SOON ↗</div></div
+          >
+        }
+        <nav class="tut-panel-nav" aria-label="Navegación de tutoriales"
+          ><button
+            type="button"
+            class="tut-panel-nav-btn tut-panel-nav-btn--prev"
+            (click)="previous.emit()"
+            [disabled]="!hasPrev"
+            [attr.aria-label]="hasPrev ? 'Anterior: ' + prevTitle : 'Primer tutorial'"
+            ><span class="tut-nav-arrow" aria-hidden="true">←</span
+            ><span class="tut-nav-text">
+              @if (hasPrev) {
+                <small>ANTERIOR</small><strong>{{ prevTitle }}</strong>
+              } @else {
+                <span class="tut-nav-empty">Primer tutorial</span>
+              }
+            </span></button
+          ><button
+            type="button"
+            class="tut-panel-nav-btn tut-panel-nav-btn--next"
+            (click)="next.emit()"
+            [disabled]="!hasNext"
+            [attr.aria-label]="hasNext ? 'Siguiente: ' + nextTitle : 'Último tutorial'"
+            ><span class="tut-nav-text">
+              @if (hasNext) {
+                <small>SIGUIENTE</small><strong>{{ nextTitle }}</strong>
+              } @else {
+                <span class="tut-nav-empty">Último tutorial</span>
+              }</span
+            ><span class="tut-nav-arrow" aria-hidden="true">→</span></button
+          ></nav
+        ></div
+      ></div
+    ></section
+  ></div
+>
