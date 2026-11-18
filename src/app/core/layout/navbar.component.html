@@ -1,0 +1,64 @@
+<header class="site-header"
+  ><div class="navbar-container"
+    ><a
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'ignored', matrixParams: 'ignored' }"
+      ariaCurrentWhenActive="page"
+      routerLink="/"
+      class="navbar-brand"
+      aria-label="JUST ROLL - Inicio"
+      (click)="closeMenu()"
+      ><span class="brand-logo"
+        ><img src="/images/logo.png" alt="JUST ROLL" (error)="hideImage($event)" /><span
+          class="brand-fallback"
+          >JR</span
+        ></span
+      ><span class="brand-name">JUST <span>ROLL!</span></span></a
+    ><button
+      [class]="'menu-toggle ' + (menuOpen ? 'is-open' : '')"
+      type="button"
+      [attr.aria-label]="menuOpen ? 'Cerrar menú' : 'Abrir menú'"
+      [attr.aria-expanded]="menuOpen"
+      aria-controls="main-navigation"
+      (click)="menuOpen = !menuOpen"
+      ><span></span><span></span><span></span></button
+    ><nav id="main-navigation" [class]="'navbar-links ' + (menuOpen ? 'menu-open' : '')"
+      ><a
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'ignored', matrixParams: 'ignored' }"
+      ariaCurrentWhenActive="page"
+        routerLink="/"
+        (click)="closeMenu()"
+        >Inicio</a
+      ><a
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ paths: 'subset', queryParams: 'ignored', fragment: 'ignored', matrixParams: 'ignored' }"
+      ariaCurrentWhenActive="page"
+        routerLink="/composiciones"
+        (click)="closeMenu()"
+        >Composiciones</a
+      ><a
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ paths: 'subset', queryParams: 'ignored', fragment: 'ignored', matrixParams: 'ignored' }"
+      ariaCurrentWhenActive="page"
+        routerLink="/tutoriales"
+        (click)="closeMenu()"
+        >Tutoriales</a
+      ><a
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ paths: 'subset', queryParams: 'ignored', fragment: 'ignored', matrixParams: 'ignored' }"
+      ariaCurrentWhenActive="page"
+        routerLink="/noticias"
+        (click)="closeMenu()"
+        >Noticias</a
+      ></nav
+    ><a
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ paths: 'subset', queryParams: 'ignored', fragment: 'ignored', matrixParams: 'ignored' }"
+      ariaCurrentWhenActive="page"
+      routerLink="/composiciones"
+      class="navbar-cta"
+      >¡A jugar!<span>↗</span></a
+    ></div
+  ></header
+>
