@@ -15,7 +15,7 @@
       "schematics": {
         "@schematics/angular:component": {
           "type": "component",
-          "addTypeToClassName": false
+          "addTypeToClassName": true
         },
         "@schematics/angular:directive": {
           "type": "directive",
@@ -103,9 +103,6 @@
             }
           },
           "defaultConfiguration": "development"
-        },
-        "test": {
-          "builder": "@angular/build:unit-test"
         }
       }
     }
