@@ -1,0 +1,90 @@
+<main class="tut-page"
+  ><section class="tut-hero"
+    ><div class="tut-hero-sunburst" aria-hidden="true"></div
+    ><div class="tut-hero-circle" aria-hidden="true"></div
+    ><span class="tut-hero-star tut-hero-star--1" aria-hidden="true">✦</span
+    ><span class="tut-hero-star tut-hero-star--2" aria-hidden="true">★</span
+    ><span class="tut-hero-star tut-hero-star--3" aria-hidden="true">✦</span
+    ><div class="tut-hero-inner"
+      ><div class="tut-hero-content"
+        ><div class="tut-hero-eyebrow"
+          ><span class="tut-hero-eyebrow-dot"></span>RUTA DE APRENDIZAJE TFT</div
+        ><h1 class="tut-hero-title"
+          ><span class="tut-hero-word tut-hero-word--1">TUTO</span
+          ><span class="tut-hero-word tut-hero-word--2">RIALES</span></h1
+        ><p class="tut-hero-subtitle"
+          >De cero a avanzado. Aprende a tu ritmo con guías paso a paso.</p
+        ><div class="tut-hero-badges">
+          @for (level of tutorialLevels; track $index) {
+            <div [class]="'tut-hero-badge tut-hero-badge--' + level.color"
+              ><span class="tut-hero-badge-icon" aria-hidden="true">{{ level.icon }}</span
+              ><span>{{ level.title }}</span></div
+            >
+          }
+        </div></div
+      ><div class="tut-hero-art" aria-hidden="true"
+        ><div class="tut-art-sticker"><span>LEARN</span><small>STEP BY STEP</small></div
+        ><div class="tut-art-board"
+          ><div class="tut-art-board-top"
+            ><span>TUTORIAL</span><span class="tut-art-board-badge">01</span></div
+          ><div class="tut-art-board-grid">
+            @for (i of sequence(15); track i) {
+              <div
+                [class]="
+                  'tut-art-cell ' +
+                  ([2, 7, 10, 13].includes(i) ? 'tut-art-cell--active' : '') +
+                  ' ' +
+                  (i === 7 ? 'tut-art-cell--main' : '')
+                "
+              ></div>
+            }</div
+          ><div class="tut-art-board-bottom"
+            ><span class="tut-art-board-level">NIVEL →</span><span>★ RANK UP</span></div
+          ></div
+        ><div class="tut-art-card tut-art-card--blue"><span>↗</span><span>ESTRATEGIA</span></div
+        ><div class="tut-art-card tut-art-card--orange"><span>★</span><span>MEJORA</span></div
+        ><div class="tut-art-arrow">↘</div></div
+      ></div
+    ><div class="tut-hero-stripe" aria-hidden="true"
+      ><span></span><span></span><span></span></div></section
+  ><div class="tut-path section-container">
+    @for (level of tutorialLevels; track $index; let levelIndex = $index) {
+      @let levelTutorials = forLevel(level.id);
+      <div>
+        @if (levelIndex > 0) {
+          <jr-progress-connector
+            [fromColor]="tutorialLevels[levelIndex - 1].color"
+            [toColor]="level.color"
+          ></jr-progress-connector>
+        }
+        <div class="tut-level-header"
+          ><div [class]="'tut-level-badge tut-level-badge--' + level.color"
+            ><span class="tut-level-badge-icon" aria-hidden="true">{{ level.icon }}</span
+            >{{ level.title }}</div
+          ><p class="tut-level-subtitle">{{ level.subtitle }}</p></div
+        ><div class="tut-grid">
+          @for (tutorial of levelTutorials; track $index) {
+            <jr-tutorial-card
+              [tutorial]="tutorial"
+              [globalIndex]="indexOf(tutorial)"
+              (activate)="handleOpen($event)"
+            ></jr-tutorial-card>
+          }</div
+      ></div>
+    }
+  </div>
+  @if (selectedTutorial) {
+    <jr-tutorial-detail
+      [tutorial]="selectedTutorial"
+      (close)="handleClose()"
+      (previous)="handlePrev()"
+      (next)="handleNext()"
+      [hasPrev]="selectedIndex > 0"
+      [hasNext]="selectedIndex < ALL_TUTORIALS.length - 1"
+      [prevTitle]="selectedIndex > 0 ? ALL_TUTORIALS[selectedIndex - 1].title : ''"
+      [nextTitle]="
+        selectedIndex < ALL_TUTORIALS.length - 1 ? ALL_TUTORIALS[selectedIndex + 1].title : ''
+      "
+    ></jr-tutorial-detail>
+  }
+</main>
