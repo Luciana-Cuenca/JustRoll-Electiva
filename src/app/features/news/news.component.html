@@ -1,0 +1,180 @@
+<main class="news-page"
+  ><section class="news-hero"
+    ><div class="news-hero-sunburst" aria-hidden="true"></div
+    ><div class="news-hero-circle" aria-hidden="true"></div
+    ><span class="news-hero-star news-hero-star--1" aria-hidden="true">✦</span
+    ><span class="news-hero-star news-hero-star--2" aria-hidden="true">★</span
+    ><span class="news-hero-star news-hero-star--3" aria-hidden="true">✦</span
+    ><div class="news-hero-inner"
+      ><div class="news-hero-content"
+        ><div class="news-hero-eyebrow"
+          ><span class="news-hero-eyebrow-dot"></span>ACTUALIDAD DE TEAMFIGHT TACTICS</div
+        ><h1 class="news-hero-title"
+          ><span class="news-hero-word news-hero-word--1">NOTI</span
+          ><span class="news-hero-word news-hero-word--2">CIAS</span></h1
+        ><p class="news-hero-subtitle"
+          >Parches, nuevos sets y todo lo que pasa en el tablero. Consulta información oficial y
+          actualizada.</p
+        ><div class="news-hero-badges">
+          @for (s of newsSets; track $index) {
+            <button
+              type="button"
+              (click)="handleTabChange(s.id)"
+              [class]="
+                'news-hero-badge news-hero-badge--' +
+                (s.status === 'ACTUAL' ? 'orange' : 'blue') +
+                ' ' +
+                (activeSetId === s.id ? 'news-hero-badge--active' : '')
+              "
+              ><span class="news-hero-badge-num" aria-hidden="true">{{ s.number }}</span
+              ><span>SET {{ s.number }}: {{ s.status }}</span></button
+            >
+          }
+        </div></div
+      ><div class="news-hero-art" aria-hidden="true"
+        ><span class="news-art-big-star">✦</span
+        ><div class="news-art-sticker"><span>PATCH</span><small>NOTES</small></div
+        ><div class="news-art-screen"
+          ><div class="news-art-screen-top"
+            ><span>SET {{ activeSet?.number }}</span
+            ><span>ACTUALIZADO</span></div
+          ><div class="news-art-bars"
+            ><span></span><span></span><span></span><span></span><span></span></div
+          ><div class="news-art-screen-caption"
+            ><span>NOTICIAS</span><span>TFT 2026</span></div
+          ></div
+        ><span class="news-art-arrow" aria-hidden="true">↗</span></div
+      ></div
+    ></section
+  ><section class="news-set-switcher-section" aria-label="Selector de Set"
+    ><div class="news-set-switcher-container"
+      ><div class="news-switcher-header"
+        ><span class="news-switcher-pill">SELECCIONA EL SET</span
+        ><p class="news-switcher-hint"
+          >Alterna fácilmente entre el set en vivo y las novedades del próximo set</p
+        ></div
+      ><div class="news-set-toggle-group" role="tablist">
+        @for (s of newsSets; track $index) {
+          @let isSelected = activeSetId === s.id;@let isActual = s.status === 'ACTUAL';
+          @let color = isActual ? 'orange' : 'blue';
+          <button
+            role="tab"
+            [id]="'tab-' + s.id"
+            [attr.aria-selected]="isSelected"
+            [attr.aria-controls]="'panel-' + s.id"
+            [class]="
+              'news-set-toggle-btn news-set-toggle-btn--' +
+              color +
+              ' ' +
+              (isSelected ? 'news-set-toggle-btn--active' : '')
+            "
+            (click)="handleTabChange(s.id)"
+            ><div class="news-toggle-left"
+              ><span [class]="'news-toggle-badge news-toggle-badge--' + color">{{ s.status }}</span
+              ><span class="news-toggle-number">SET {{ s.number }}</span></div
+            ><div class="news-toggle-info"
+              ><strong class="news-toggle-name">{{ s.name }}</strong
+              ><span class="news-toggle-theme">{{ s.theme }}</span></div
+            ><div class="news-toggle-indicator">
+              @if (isSelected) {
+                <span class="news-toggle-pill news-toggle-pill--active">● ACTIVO</span>
+              } @else {
+                <span class="news-toggle-pill news-toggle-pill--idle">VER SET →</span>
+              }
+            </div></button
+          >
+        }
+      </div></div
+    ></section
+  >
+  @if (activeSet) {
+    <section
+      class="news-set-header"
+      [id]="'panel-' + activeSet.id"
+      role="tabpanel"
+      [attr.aria-labelledby]="'tab-' + activeSet.id"
+      ><div class="news-set-header-inner"
+        ><div class="news-set-visual">
+          @if (activeSet.image) {
+            <img
+              [src]="activeSet.image"
+              [alt]="'Banner de ' + activeSet.name"
+              class="news-set-cover-img"
+              loading="lazy"
+            />
+          } @else {
+            <div class="news-set-visual-fallback" aria-hidden="true"
+              ><span>SET {{ activeSet.number }}</span></div
+            >
+          }
+          <span
+            [class]="
+              'news-set-status news-set-status--' +
+              (activeSet.status === 'ACTUAL' ? 'orange' : 'blue')
+            "
+            >{{ activeSet.status }}</span
+          ></div
+        ><div class="news-set-info"
+          ><div class="news-set-meta-top"
+            ><span class="news-set-label">SET {{ activeSet.number }}</span
+            ><button
+              type="button"
+              class="news-quick-switch-btn"
+              (click)="handleTabChange(otherSet.id)"
+              [title]="'Cambiar a ' + otherSet.name"
+              >Cambiar a Set {{ otherSet.number }}: {{ otherSet.name }} ↗</button
+            ></div
+          ><h2 class="news-set-name">{{ activeSet.name }}</h2
+          ><p class="news-set-theme">{{ activeSet.theme }}</p
+          ><p class="news-set-summary">{{ activeSet.summary }}</p
+          ><div class="news-set-meta"
+            ><span class="news-set-release"
+              >{{
+                activeSet.status === 'ACTUAL' ? 'En vivo desde el' : 'Estreno previsto:'
+              }}&#32;<strong>{{ activeSet.releaseDate }}</strong></span
+            ><span class="news-set-count"
+              >{{ setNews.length }}
+              {{ setNews.length === 1 ? 'artículo publicado' : 'artículos publicados' }}</span
+            ></div
+          ></div
+        ></div
+      ></section
+    >
+  }
+  <section class="news-grid-section"
+    ><div class="news-grid-inner">
+      @if (featured) {
+        <div class="news-featured-wrapper"
+          ><jr-news-card
+            [newsItem]="featured"
+            (activate)="handleOpen($event)"
+            [featured]="true"
+          ></jr-news-card
+        ></div>
+      }
+      @if (rest.length > 0) {
+        <div class="news-grid">
+          @for (item of rest; track $index) {
+            <jr-news-card [newsItem]="item" (activate)="handleOpen($event)"></jr-news-card>
+          }
+        </div>
+      }
+      @if (setNews.length === 0) {
+        <div class="news-empty"
+          ><span class="news-empty-star" aria-hidden="true">✦</span
+          ><p>No hay noticias disponibles para este set todavía.</p></div
+        >
+      }
+    </div></section
+  >
+  @if (selectedNews) {
+    <jr-news-detail
+      [newsItem]="selectedNews"
+      (close)="handleClose()"
+      (previous)="handlePrev()"
+      (next)="handleNext()"
+      [hasPrev]="selectedIndex > 0"
+      [hasNext]="selectedIndex < setNews.length - 1"
+    ></jr-news-detail>
+  }
+</main>
