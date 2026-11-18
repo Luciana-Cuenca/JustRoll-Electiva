@@ -1,0 +1,80 @@
+<div
+  jrModal
+  (modalClose)="close.emit()"
+  class="news-detail-overlay"
+  (click)="handleOverlayClick($event)"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="newsItem.title"
+  ><div class="news-detail-panel"
+    ><div class="news-detail-header"
+      ><div class="news-detail-meta"
+        ><span [class]="'news-detail-badge news-detail-badge--' + color">{{
+          newsItem.category
+        }}</span
+        ><span class="news-detail-date">{{ newsItem.date }}</span></div
+      ><button class="news-detail-close" (click)="close.emit()" aria-label="Cerrar noticia"
+        >✕</button
+      ></div
+    ><div class="news-detail-scroll-area"
+      ><h2 class="news-detail-title">{{ newsItem.title }}</h2>
+      @if (newsItem.image) {
+        <div class="news-detail-cover"
+          ><img [src]="newsItem.image" [alt]="newsItem.title" loading="lazy"
+        /></div>
+      }
+      <div class="news-detail-body">
+        @if (isEmpty) {
+          <div class="news-detail-soon"
+            ><div class="news-detail-soon-deco" aria-hidden="true"
+              ><span class="news-detail-soon-star">✦</span
+              ><span class="news-detail-soon-star news-detail-soon-star--2">★</span></div
+            ><p class="news-detail-soon-text">PRÓXIMAMENTE</p
+            ><p class="news-detail-soon-sub"
+              >El contenido completo de esta noticia estará disponible en breve.
+              @if (newsItem.source) {
+                &#32;<a
+                  [href]="newsItem.source"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="news-detail-source-link"
+                  >Consulta las notas oficiales ↗</a
+                >
+              }
+            </p></div
+          >
+        } @else {
+          @for (block of newsItem.content || []; track $index; let i = $index) {
+            <jr-news-block [block]="block"></jr-news-block>
+          }
+        }</div></div
+    ><div class="news-detail-footer">
+      @if (newsItem.source && !isEmpty) {
+        <a
+          [href]="newsItem.source"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="news-detail-source"
+          >Fuente oficial <span aria-hidden="true">↗</span></a
+        >
+      } @else {
+        <span class="news-detail-source-note">JUST ROLL NOTICIAS</span>
+      }
+      <div class="news-detail-nav"
+        ><button
+          class="news-detail-nav-btn"
+          (click)="previous.emit()"
+          [disabled]="!hasPrev"
+          aria-label="Noticia anterior"
+          >← ANTERIOR</button
+        ><button
+          class="news-detail-nav-btn"
+          (click)="next.emit()"
+          [disabled]="!hasNext"
+          aria-label="Noticia siguiente"
+          >SIGUIENTE →</button
+        ></div
+      ></div
+    ></div
+  ></div
+>
