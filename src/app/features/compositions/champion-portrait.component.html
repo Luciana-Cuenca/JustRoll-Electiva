@@ -1,0 +1,8 @@
+<div class="detail-champion"
+  ><div [class]="'detail-champion-image ' + (costColors[champion.cost] || 'hex-cost-special')">
+    @if (champion.image) {
+      <img [src]="champion.image" [alt]="champion.name" (error)="hideImage($event)" />
+    }</div
+  ><p>{{ champion.name }}</p
+  ><small>{{ champion.cost ? champion.cost + ' de oro' : 'Especial' }}</small></div
+>

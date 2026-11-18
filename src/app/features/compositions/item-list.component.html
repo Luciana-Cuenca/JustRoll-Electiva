@@ -1,0 +1,9 @@
+<div class="detail-items">
+  @for (item of items.slice(0, 8); track $index; let index = $index) {
+    <div class="detail-item" [title]="item.name">
+      @if (item.image) {
+        <img [src]="item.image" [alt]="item.name" (error)="hideImage($event)" />
+      }
+    </div>
+  }
+</div>
