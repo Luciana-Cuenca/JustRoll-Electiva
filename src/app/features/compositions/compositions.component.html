@@ -1,0 +1,46 @@
+<main class="tier-page"
+  ><section class="tier-hero"
+    ><div class="tier-hero-content"
+      ><span class="tier-eyebrow">ENCUENTRA TU PRÓXIMA ESTRATEGIA</span
+      ><h1>COMPOSITION <span>TIER LIST</span></h1
+      ><p
+        >Explora composiciones, conoce sus estrategias y descubre cómo posicionar tus campeones para
+        cada partida.</p
+      ><div class="tier-hero-tags"
+        ><span>ESTRATEGIAS</span><span>COMPOSICIONES</span><span>TFT</span></div
+      ></div
+    ><div class="tier-hero-decoration"
+      ><span class="tier-star">✦</span><span class="tier-decoration-text">JUST ROLL</span
+      ><span class="tier-decoration-small">PLAY SMART</span></div
+    ></section
+  ><div class="tier-content"
+    ><div class="tier-section-heading"
+      ><div
+        ><span class="tier-section-label">ORGANIZA TU ESTRATEGIA</span
+        ><h2>Composiciones destacadas</h2
+        ><p>Selecciona una tarjeta para consultar su guía y posicionamiento.</p></div
+      ></div
+    ><div class="tier-groups">
+      @for (tier of tiers; track $index) {
+        @let tierCompositions = catalog.forTier(tier.id);
+        <jr-tier-section
+          [tier]="tier"
+          [compositions]="tierCompositions"
+          (selectComposition)="selectedComposition = $event"
+        ></jr-tier-section>
+      }</div
+    ><div class="tier-tip"
+      ><span class="tier-tip-icon">!</span
+      ><p
+        >Recuerda que las composiciones pueden variar según los aumentos, objetos y campeones
+        disponibles durante cada partida.</p
+      ></div
+    ></div
+  >
+  @if (selectedComposition) {
+    <jr-composition-detail
+      [composition]="selectedComposition"
+      (close)="selectedComposition = null"
+    ></jr-composition-detail>
+  }
+</main>
