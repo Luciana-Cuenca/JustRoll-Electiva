@@ -1,0 +1,28 @@
+<article
+  [class]="'news-card news-card--' + color + (featured ? ' news-card--featured' : '')"
+  (click)="activate.emit(newsItem)"
+  (keydown)="handleKeyDown($event)"
+  role="button"
+  [tabindex]="0"
+  [attr.aria-label]="'Leer noticia: ' + newsItem.title"
+  ><div class="news-card-visual">
+    @if (newsItem.image) {
+      <img [src]="newsItem.image" [alt]="newsItem.title" class="news-card-img" loading="lazy" />
+    } @else {
+      <div class="news-card-placeholder" aria-hidden="true"
+        ><span class="news-card-ph-label">TFT</span></div
+      >
+    }
+    <span [class]="'news-card-badge news-card-badge--' + color">{{ newsItem.category }}</span></div
+  ><div class="news-card-body"
+    ><span class="news-card-date">{{ newsItem.date }}</span
+    ><h3 class="news-card-title">{{ newsItem.title }}</h3
+    ><p class="news-card-summary">{{ newsItem.summary }}</p
+    ><div class="news-card-footer"
+      ><span class="news-card-read">LEER MÁS <span aria-hidden="true">↗</span></span>
+      @if (newsItem.content && newsItem.content.length === 0) {
+        <span class="news-card-soon">PRÓXIMAMENTE</span>
+      }
+    </div></div
+  ></article
+>

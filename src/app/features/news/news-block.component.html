@@ -1,0 +1,56 @@
+@switch (block.type) {
+  @case ('heading') {
+    <h3 class="news-block-heading">{{ block.text }}</h3>
+  }
+  @case ('text') {
+    <p class="news-block-text">{{ block.text }}</p>
+  }
+  @case ('list') {
+    <ul class="news-block-list">
+      @for (item of block.items || []; track $index; let i = $index) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+  }
+  @case ('keyTip') {
+    <div class="news-block-keytip" role="note"
+      ><span class="news-block-keytip-badge" aria-hidden="true">!</span><p>{{ block.text }}</p></div
+    >
+  }
+  @case ('table') {
+    <div class="news-block-table-wrapper"
+      ><table class="news-block-table">
+        @if (block.headers) {
+          <thead
+            ><tr>
+              @for (h of block.headers; track $index; let i = $index) {
+                <th>{{ h }}</th>
+              }
+            </tr></thead
+          >
+        }
+        <tbody>
+          @for (row of block.rows || []; track $index; let i = $index) {
+            <tr>
+              @for (cell of row; track $index; let j = $index) {
+                <td>{{ cell }}</td>
+              }
+            </tr>
+          }
+        </tbody></table
+      ></div
+    >
+  }
+  @case ('image') {
+    <figure class="news-block-figure">
+      @if (block.src) {
+        <img [src]="block.src" [alt]="block.caption || ''" loading="lazy" />
+      } @else {
+        <div class="news-block-img-placeholder" aria-hidden="true"><span>IMG</span></div>
+      }
+      @if (block.caption) {
+        <figcaption>{{ block.caption }}</figcaption>
+      }
+    </figure>
+  }
+}
