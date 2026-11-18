@@ -1,0 +1,34 @@
+<div class="hex-unit" [title]="unit.name + ' (' + unit.cost + ' de oro)'">
+  @if (traits.length > 0) {
+    <div class="hex-unit-traits">
+      @for (trait of traits; track $index) {
+        <span class="hex-trait-icon" [title]="trait.name">
+          @if (trait.icon) {
+            <img [src]="trait.icon" [alt]="trait.name" (error)="hideImage($event)" />
+          }
+        </span>
+      }
+    </div>
+  }
+  <div [class]="'hex-unit-shape ' + costClass"
+    ><div class="hex-unit-image">
+      @if (unit.image) {
+        <img [src]="unit.image" [alt]="unit.name" (error)="hideImage($event)" />
+      }</div
+  ></div>
+  @if (items.length > 0) {
+    <div class="hex-unit-items">
+      @for (item of items; track $index; let index = $index) {
+        @let itemSrc =
+          typeof item === 'string' && (item.startsWith('/') || item.startsWith('http'))
+            ? item
+            : '/images/items/' + item + '.png';
+        @let itemTitle =
+          typeof item === 'string' ? item.split('/').pop()?.replace('.png', '') : 'Objeto';
+        <span class="hex-item-icon" [title]="itemTitle"
+          ><img [src]="itemSrc" [alt]="itemTitle" (error)="hideImage($event)"
+        /></span>
+      }
+    </div>
+  }
+</div>
